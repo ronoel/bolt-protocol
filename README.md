@@ -113,6 +113,10 @@ This function initiates a withdrawal request for funds from the Bolt Contract. T
 
 This transaction enables fund transfers between wallets within the protocol. It must be marked as sponsored and submitted to the Bolt API. The transaction is confirmed by the Bolt Protocol.
 
+> Note: The minimum fee accepted by the protocol is 10 satoshis.
+> 
+> [See example implementation](cookbook/transfer.md)
+
 ```lisp
 ;;   Executes a transfer between wallets within the contract.
 ;;   Parameters:
@@ -150,6 +154,8 @@ This function can also be used as an alternative to "Withdraw Funds from Bolt Co
 ### 5. Direct Transfer
 
 This function enables users to transfer their sBTC directly on the Stacks blockchain while paying fees in sBTC instead of STX. The Bolt Operator's role is limited to sponsoring the transaction, making it possible to pay fees in sBTC. Unlike other transfer types, this is a direct transfer between Stacks wallets that settles immediately on the Stacks blockchain.
+
+> [See example implementation](cookbook/transfer.md)
 
 ```lisp
 ;;   Initiates a direct token transfer from the sender to a recipient.
