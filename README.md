@@ -63,9 +63,13 @@ Contract address on Testnet:
 ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF.boltproto-sbtc-rc-1-0-0
 ```
 
+## Non-Sponsored Functions
+
+These functions must be submitted directly to the Stacks blockchain and require STX for transaction fees.
+
 ### 1. Deposit Funds on Bolt Contract
 
-This function allows users to deposit sBTC into the Bolt Contract. The transaction is processed on the Stacks blockchain and requires STX for transaction fees. Once deposited, funds can be used for instant transfers within the protocol.
+This function allows users to deposit sBTC into the Bolt Contract. The transaction requires STX for network fees and is processed directly on the Stacks blockchain.
 
 ```lisp
 ;;   Deposits tokens into a recipients wallet.
@@ -79,27 +83,9 @@ This function allows users to deposit sBTC into the Bolt Contract. The transacti
     (memo (optional (buff 34))))
 ```
 
-### 1.1 Sponsored Deposit
-
-This function allows users to deposit funds into the Bolt Contract while paying fees in sBTC. The Bolt Operator acts as a sponsor to enable fee payment in sBTC instead of STX. The deposited amount must be greater than the fee.
-
-```lisp
-;;   Deposits tokens from an authorized sponsor operator with fee handling.
-;;   Parameters:
-;;     amount: uint                   The deposit amount (must exceed fee).
-;;     recipient: principal           The recipient wallet.
-;;     memo: (optional (buff 34))      Optional memo.
-;;     fee: uint                      The fee amount for the deposit.
-(sponsored-deposit 
-    (amount uint)
-    (recipient principal)
-    (memo (optional (buff 34)))
-    (fee uint))
-```
-
 ### 2. Withdraw Funds from Bolt Contract
 
-This function initiates a withdrawal request for funds from the Bolt Contract. The withdrawal process includes a timelock protection mechanism. When called, it validates the user's balance, moves the requested amount to a withdrawal-requested state, and records the block height for timelock purposes. The withdrawal can only be completed after the timelock period expires.
+This function initiates a withdrawal request with timelock protection. The transaction requires STX for network fees and is processed directly on the Stacks blockchain.
 
 ```lisp
 ;;   Initiates a withdrawal request with timelock protection.
@@ -109,67 +95,43 @@ This function initiates a withdrawal request for funds from the Bolt Contract. T
     (amount uint))
 ```
 
-### 3. Internal Transfer*
+## Sponsored Functions
 
-This transaction enables fund transfers between wallets within the protocol. It must be marked as sponsored and submitted to the Bolt API. The transaction is confirmed by the Bolt Protocol.
+These functions are sponsored by the Bolt Protocol operator, allowing users to pay fees in sBTC instead of STX. All sponsored functions must be submitted through the Bolt API.
 
 > Note: The minimum fee accepted by the protocol is 10 satoshis.
 > 
 > [See example implementation](cookbook/transfer.md)
 
+### Transfer Function Matrix
+
+Choose the appropriate function based on the source and destination of your transfer:
+
+| From \ To      | Bolt Wallet        | Stacks Wallet      |
+|----------------|--------------------|--------------------|
+| Bolt Wallet    | `internal-transfer`| `external-transfer`|
+| Stacks Wallet  | `sponsored-deposit`| `transfer`         |
+
+All sponsored functions share the same parameter structure:
+
 ```lisp
-;;   Executes a transfer between wallets within the contract.
-;;   Parameters:
+;;   Parameters for all sponsored functions:
 ;;     amount: uint                   The transfer amount.
 ;;     recipient: principal           The destination wallet.
 ;;     memo: (optional (buff 34))      Optional memo.
-;;     fee: uint                      Fee amount
-(internal-transfer 
+;;     fee: uint                      Fee amount in sBTC (min 10 satoshis)
+(function-name 
     (amount uint)
     (recipient principal)
     (memo (optional (buff 34)))
     (fee uint))
 ```
 
-### 4. External Transfer*
-
-This transaction enables fund transfers from Bolt Protocol to a Stacks wallet. It must be marked as sponsored and submitted to the Bolt API. Although Bolt Protocol confirms the transaction for the sender, the final settlement occurs on the Stacks blockchain. Therefore, the receiver must wait for confirmation on the Stacks network before moving the funds.
-
-This function can also be used as an alternative to "Withdraw Funds from Bolt Contract" when users want to withdraw their funds immediately without the timelock protection. In this case, users pay the fee in sBTC instead of STX.
-
-```lisp
-;;   Executes an external transfer from the contract to a Stacks wallet.
-;;   Parameters:
-;;     amount: uint                   The transfer amount.
-;;     recipient: principal           The destination wallet.
-;;     memo: (optional (buff 34))      Optional memo.
-;;     fee: uint                      Fee amount
-(external-transfer 
-    (amount uint)
-    (recipient principal)
-    (memo (optional (buff 34)))
-    (fee uint))
-```
-
-### 5. Direct Transfer
-
-This function enables users to transfer their sBTC directly on the Stacks blockchain while paying fees in sBTC instead of STX. The Bolt Operator's role is limited to sponsoring the transaction, making it possible to pay fees in sBTC. Unlike other transfer types, this is a direct transfer between Stacks wallets that settles immediately on the Stacks blockchain.
-
-> [See example implementation](cookbook/transfer.md)
-
-```lisp
-;;   Initiates a direct token transfer from the sender to a recipient.
-;;   Parameters:
-;;     amount: uint                   The amount of tokens to transfer.
-;;     recipient: principal           The destination wallet.
-;;     memo: (optional (buff 34))      Optional memo attached to the transfer.
-;;     fee: uint                      The fee amount for the transfer.
-(transfer 
-    (amount uint)
-    (recipient principal)
-    (memo (optional (buff 34)))
-    (fee uint))
-```
+Function descriptions:
+- `internal-transfer`: Transfer between Bolt Protocol wallets
+- `external-transfer`: Transfer from Bolt Protocol to Stacks wallet
+- `sponsored-deposit`: Deposit from Stacks wallet to Bolt Protocol
+- `transfer`: Direct transfer between Stacks wallets
 
 ## Bolt API (v1)
 
