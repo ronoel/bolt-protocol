@@ -41,7 +41,7 @@ async function transferSbtc() {
         senderKey: "<sender-key>",  // Replace with sender's private key
         network: STACKS_TESTNET,
         contractAddress: "ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF",
-        contractName: "boltproto-sbtc-rc-1-0-0",
+        contractName: "boltproto-sbtc-rc-1-1-0",
         functionName: "transfer",
         functionArgs: [
             Cl.uint(amount),

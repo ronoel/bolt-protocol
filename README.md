@@ -60,7 +60,7 @@ We also offer a demo dApp on our website for users who want to try it out:
 Contract address on Testnet:
 
 ```
-ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF.boltproto-sbtc-rc-1-0-0
+ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF.boltproto-sbtc-rc-1-1-0
 ```
 
 ## Non-Sponsored Functions
