@@ -60,7 +60,7 @@ We also offer a demo dApp on our website for users who want to try it out:
 Contract address on Testnet:
 
 ```
-ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF.boltproto-sbtc-rc-1-0-0
+ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF.boltproto-sbtc-rc-1-1-0
 ```
 
 ## Non-Sponsored Functions
@@ -109,8 +109,8 @@ Choose the appropriate function based on the source and destination of your tran
 
 | From \ To      | Bolt Wallet        | Stacks Wallet      |
 |----------------|--------------------|--------------------|
-| Bolt Wallet    | `internal-transfer`| `external-transfer`|
-| Stacks Wallet  | `sponsored-deposit`| `transfer`         |
+| Bolt Wallet    | `transfer-bolt-to-bolt`| `transfer-bolt-to-stacks`|
+| Stacks Wallet  | `transfer-stacks-to-bolt`| `transfer-stacks-to-stacks`|
 
 All sponsored functions share the same parameter structure:
 
@@ -128,10 +128,10 @@ All sponsored functions share the same parameter structure:
 ```
 
 Function descriptions:
-- `internal-transfer`: Transfer between Bolt Protocol wallets
-- `external-transfer`: Transfer from Bolt Protocol to Stacks wallet
-- `sponsored-deposit`: Deposit from Stacks wallet to Bolt Protocol
-- `transfer`: Direct transfer between Stacks wallets
+- `transfer-bolt-to-bolt`: Transfer between Bolt Protocol wallets
+- `transfer-bolt-to-stacks`: Transfer from Bolt Protocol to Stacks wallet
+- `transfer-stacks-to-bolt`: Deposit from Stacks wallet to Bolt Protocol
+- `transfer-stacks-to-stacks`: Direct transfer between Stacks wallets
 
 ## Bolt API (v1)
 
