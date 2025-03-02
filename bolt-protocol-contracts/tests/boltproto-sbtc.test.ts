@@ -338,6 +338,23 @@ describe("Administrative Functions Tests", () => {
       expect(result.result).toBeOk(Cl.bool(true));
     });
 
+    // it("should allow transfer with BNS", async () => {
+    //   const amount = 1000000;
+    //   const memo = Buffer.from("Test transfer");
+    //   const muneebAddress = "SP17A1AM4TNYFPAZ75Z84X3D6R2F6DTJBDJ6B0YF";
+    //   const finalBalance1 = await getTokenBalance(muneebAddress);
+    //   const result = await transferBNSWithMemo(amount, "muneeb", "btc", memo, FEE, address1);
+    //   expect(result.result).toBeOk(Cl.bool(true));
+
+    //   const finalBalance2 = await getTokenBalance(muneebAddress);
+    //   console.log("finalBalance1: ", cvToValue(finalBalance1.result));
+    //   console.log("finalBalance2: ", cvToValue(finalBalance2.result));
+    //   expect(Number(cvToValue(finalBalance1.result).value))
+    //     .toBe(0);
+    //   expect(Number(cvToValue(finalBalance2.result).value))
+    //     .toBe(1000000);
+    // });
+
     it("should fail transfer with insufficient balance", async () => {
       const result = await transfer(2000000000, address2, FEE, address1);
       expect(result.result).not.toBeOk(Cl.bool(true));
@@ -843,6 +860,14 @@ describe("Administrative Functions Tests", () => {
       expect(result.result).toBeErr(Cl.uint(1));
     });
   });
+
+  // describe("BNS Test", () => {
+  //   it("BNS", async () => {
+  //     const result = await transferBNSWithMemo(1000000, "muneeb", "blockstack", Buffer.from("Test transfer"), 10, address1);
+  //     console.log("ADDRESS: ", Cl.prettyPrint(result.result));
+  //     // expect(result.result).toBeErr(Cl.uint(1));
+  //   });
+  // });
 });
 
 // Helper functions
@@ -1033,7 +1058,7 @@ function getWalletData(user: string) {
 function transfer(amount: number, recipient: string, fee: number, sender: string) {
   return simnet.callPublicFn(
     CONTRACT_NAME,
-    "transfer",
+    "transfer-stacks-to-stacks",
     [
       Cl.uint(amount),
       Cl.principal(recipient),
@@ -1047,7 +1072,7 @@ function transfer(amount: number, recipient: string, fee: number, sender: string
 function transferWithMemo(amount: number, recipient: string, memo: Buffer, fee: number, sender: string) {
   return simnet.callPublicFn(
     CONTRACT_NAME,
-    "transfer",
+    "transfer-stacks-to-stacks",
     [
       Cl.uint(amount),
       Cl.principal(recipient),
@@ -1057,6 +1082,21 @@ function transferWithMemo(amount: number, recipient: string, memo: Buffer, fee: 
     sender
   );
 }
+
+// function transferBNSWithMemo(amount: number, recipientName: string, recipientNamespace: string, memo: Buffer, fee: number, sender: string) {
+//   return simnet.callPublicFn(
+//     CONTRACT_NAME,
+//     "transfer-bns",
+//     [
+//       Cl.uint(amount),
+//       Cl.bufferFromAscii(recipientName),
+//       Cl.bufferFromAscii(recipientNamespace),
+//       Cl.some(Cl.buffer(memo)),
+//       Cl.uint(fee)
+//     ],
+//     sender
+//   );
+// }
 
 function getTokenBalance(user: string) {
   return simnet.callReadOnlyFn(
@@ -1070,7 +1110,7 @@ function getTokenBalance(user: string) {
 function sponsoredDeposit(amount: number, recipient: string, fee: number, sender: string) {
   return simnet.callPublicFn(
     CONTRACT_NAME,
-    "sponsored-deposit",
+    "transfer-stacks-to-bolt",
     [
       Cl.uint(amount),
       Cl.principal(recipient),
@@ -1084,7 +1124,7 @@ function sponsoredDeposit(amount: number, recipient: string, fee: number, sender
 function internalTransfer(amount: number, recipient: string, fee: number, sender: string) {
   return simnet.callPublicFn(
     CONTRACT_NAME,
-    "internal-transfer",
+    "transfer-bolt-to-bolt",
     [
       Cl.uint(amount),
       Cl.principal(recipient),
@@ -1107,7 +1147,7 @@ function requestWithdrawal(amount: number, sender: string) {
 function externalTransfer(amount: number, recipient: string, fee: number, sender: string) {
   return simnet.callPublicFn(
     CONTRACT_NAME,
-    "external-transfer",
+    "transfer-bolt-to-stacks",
     [
       Cl.uint(amount),
       Cl.principal(recipient),

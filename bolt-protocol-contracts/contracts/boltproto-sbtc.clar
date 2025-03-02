@@ -171,7 +171,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Public Functions:
 ;;
-;; transfer:
+;; transfer-stacks-to-stacks:
 ;;   Initiates a direct token transfer from the sender to a recipient.
 ;;   Parameters:
 ;;     amount: uint                   The amount of tokens to transfer.
@@ -183,7 +183,11 @@
 ;;     Transfers tokens directly from sender to recipient.
 ;;     Emits a transfer event.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(define-public (transfer (amount uint) (recipient principal) (memo (optional (buff 34))) (fee uint))
+(define-public (transfer-stacks-to-stacks 
+                    (amount uint) 
+                    (recipient principal) 
+                    (memo (optional (buff 34))) 
+                    (fee uint))
     (let (
           (sender tx-sender)
          )
@@ -193,7 +197,7 @@
         (try! (contract-call? .sbtc-token transfer amount tx-sender recipient memo))
         
         (print {
-            event: "transfer",
+            event: "transfer-stacks-to-stacks",
             sender: tx-sender,
             amount: amount,
             recipient: recipient,
@@ -240,7 +244,7 @@
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; sponsored-deposit:
+;; transfer-stacks-to-bolt:
 ;;   Deposits tokens from an authorized sponsor operator with fee handling.
 ;;   Parameters:
 ;;     amount: uint                   The deposit amount (must exceed fee).
@@ -253,9 +257,9 @@
 ;;     Updates recipients balance (amount minus fee).
 ;;     Collects and distributes fee.
 ;;     Transfers tokens to contract.
-;;     Emits a sponsored-deposit event.
+;;     Emits a transfer-stacks-to-bolt event.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(define-public (sponsored-deposit 
+(define-public (transfer-stacks-to-bolt 
                     (amount uint)
                     (recipient principal)
                     (memo (optional (buff 34)))
@@ -270,7 +274,7 @@
         (split-fee fee)
         (try! (contract-call? .sbtc-token transfer (+ amount fee) tx-sender (as-contract tx-sender) memo))
         (print {
-            event: "sponsored-deposit",
+            event: "transfer-stacks-to-bolt",
             sender: tx-sender,
             amount: amount,
             recipient: recipient,
@@ -281,22 +285,22 @@
 )
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; internal-transfer:
-;;   Executes a transfer between wallets within the contracts balance tracking.
+;; transfer-bolt-to-bolt:
+;;   Executes a transfer between wallets within the contract.
 ;;   Parameters:
 ;;     amount: uint                   The transfer amount.
 ;;     recipient: principal           The destination wallet.
 ;;     memo: (optional (buff 34))      Optional memo.
-;;     fee: uint                      The fee amount for the transfer.
+;;     fee: uint                      Fee amount
 ;;   Process:
 ;;     Validates operator authorization.
 ;;     Checks available balance including pending withdrawals.
 ;;     Deducts amount and fee from senders tracked balance.
 ;;     Credits amount to recipients tracked balance.
 ;;     Splits and distributes the fee.
-;;     Emits an internal-transfer event.
+;;     Emits an transfer-bolt-to-bolt event.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(define-public (internal-transfer 
+(define-public (transfer-bolt-to-bolt 
                 (amount uint)
                 (recipient principal)
                 (memo (optional (buff 34)))
@@ -331,7 +335,7 @@
         (split-fee fee)
         
         (print {
-            event: "internal-transfer",
+            event: "transfer-bolt-to-bolt",
             sender: tx-sender,
             amount: amount,
             recipient: recipient,
@@ -342,22 +346,22 @@
     ))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; external-transfer:
-;;   Executes an external transfer from the contracts internal wallet to an external wallet.
+;; transfer-bolt-to-stacks:
+;;   Executes an external transfer from the contract to a Stacks wallet.
 ;;   Parameters:
 ;;     amount: uint                   The transfer amount.
 ;;     recipient: principal           The destination wallet.
 ;;     memo: (optional (buff 34))      Optional memo.
-;;     fee: uint                      The fee amount for the transfer.
+;;     fee: uint                      Fee amount
 ;;   Process:
 ;;     Validates operator authorization.
 ;;     Verifies available funds (including pending withdrawals).
 ;;     Deducts funds and fee from senders wallet.
 ;;     Splits and distributes the fee.
 ;;     Transfers tokens from contract to external wallet.
-;;     Emits an external-transfer event.
+;;     Emits an transfer-bolt-to-stacks event.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(define-public (external-transfer 
+(define-public (transfer-bolt-to-stacks 
                 (amount uint)
                 (recipient principal)
                 (memo (optional (buff 34)))
@@ -392,7 +396,7 @@
             recipient 
             memo)))
         (print {
-            event: "external-transfer",
+            event: "transfer-bolt-to-stacks",
             sender: tx-sender,
             amount: amount,
             recipient: recipient,
