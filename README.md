@@ -156,12 +156,56 @@ Response:
 }
 ```
 
+### Get Transaction History
+
+Retrieves transaction history for a specific wallet address and token.
+
+```http
+GET /api/v1/wallet/:address/:token/transactions/sbtc-token
+```
+
+Example:
+```http
+GET https://boltproto.org/api/v1/wallet/ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF/sbtc-token/transactions
+```
+
+Response:
+```json
+{
+    "items": [
+        {
+            "txId": "faac8c81f79a7740341861dc689b03809145c3756450881018c8fa4859fe8495",
+            "token": "sbtc-token",
+            "amount": "1000000",
+            "fee": "10",
+            "sender": "ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF",
+            "recipient": "ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF",
+            "functionName": "transfer-bolt-to-stacks",
+            "timestamp": {}
+        }
+    ],
+    "totalItems": 1,
+    "totalPages": 1,
+    "currentPage": 1
+}
+```
+
+
+The response includes pagination details and a list of transaction items with the following fields:
+- `txId`: The transaction identifier- `token`: The token type (currently only "sbtc-token")
+- `amount`: Transaction amount in satoshis
+- `fee`: Fee amount in satoshis
+- `sender`: The sending wallet address
+- `recipient`: The receiving wallet address
+- `functionName`: The smart contract function used
+- `timestamp`: Transaction timestamp
+
 ### Submit Transaction
 
 Submits a serialized transaction to the Bolt Protocol.
 
 ```http
-POST /api/v1/transaction
+POST /api/v1/transaction/sbtc-token
 ```
 
 Request Body:
@@ -174,8 +218,7 @@ Request Body:
 Response:
 ```json
 {
-    "success": true,
-    "txid": "5bed517eb7b58082d39df49240b75f1246584cd56a1b1af69c64295b86334291"
+        "txid": "5bed517eb7b58082d39df49240b75f1246584cd56a1b1af69c64295b86334291"
 }
 ```
 
