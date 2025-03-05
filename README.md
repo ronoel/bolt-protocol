@@ -161,7 +161,7 @@ Response:
 Submits a serialized transaction to the Bolt Protocol.
 
 ```http
-POST /api/v1/transaction
+POST /api/v1/transaction/sbtc-token
 ```
 
 Request Body:
@@ -174,7 +174,6 @@ Request Body:
 Response:
 ```json
 {
-    "success": true,
     "txid": "5bed517eb7b58082d39df49240b75f1246584cd56a1b1af69c64295b86334291"
 }
 ```
