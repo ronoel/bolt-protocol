@@ -101,7 +101,7 @@ These functions are sponsored by the Bolt Protocol operator, allowing users to p
 
 > Note: The minimum fee accepted by the protocol is 10 satoshis.
 > 
-> [See example implementation](cookbook/transfer.md)
+> [See example implementation](cookbook/transfer-stacks-to-stacks.md)
 
 ### Transfer Function Matrix
 

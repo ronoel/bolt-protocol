@@ -21,7 +21,7 @@ import {
     SignedContractCallOptions,
 } from "@stacks/transactions";
 
-async function transferSbtc() {
+async function transferStacksToStacks() {
     // Amount and fee in satoshis
     const amount = 100000000; // 1 sBTC
     const fee = 10;          // 10 satoshis minimum fee
@@ -32,7 +32,7 @@ async function transferSbtc() {
         address: "<sender-wallet-address>",    // Replace with actual sender address
         condition: 'eq',
         amount: amount + fee,
-        asset: 'ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF.sbtc-token::sbtc-token'
+        asset: 'SM3VDXK3WZZSA84XXFKAFAF15NNZX32CTSG82JFQ4.sbtc-token::sbtc-token'
     };
 
     // Transaction options
@@ -40,9 +40,9 @@ async function transferSbtc() {
         sponsored: true,  // Enable sponsorship
         senderKey: "<sender-key>",  // Replace with sender's private key
         network: STACKS_TESTNET,
-        contractAddress: "ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF",
-        contractName: "boltproto-sbtc-rc-1-1-0",
-        functionName: "transfer",
+        contractAddress: "SP3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02ZHQCMVJ",
+        contractName: "boltproto-sbtc-v1",
+        functionName: "transfer-stacks-to-stacks",
         functionArgs: [
             Cl.uint(amount),
             Cl.principal("<recipient-address>"),  // Replace with recipient address
@@ -58,7 +58,7 @@ async function transferSbtc() {
     const serializedTx = bytesToHex(transaction.serializeBytes());
 
     // Submit to Bolt Protocol API
-    const response = await fetch('https://boltproto.org/api/v1/transaction', {
+    const response = await fetch('https://boltproto.org/api/v1/transaction/sbtc-token', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
