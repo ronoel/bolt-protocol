@@ -4,22 +4,46 @@
 
 # Bolt Protocol
 
-Bolt Protocol is designed to enable near-instant transactions for SIP-10 assets (tokens on the Stacks blockchain, like sBTC), improving the user experience and secured by the Bitcoin network.
+Bolt Protocol is designed to improve the user experience for wallets and dApps on the Stacks blockchain.
 
-# Introduction
+Bolt Protocol solves two critical pain points for Stacks users:
+1. **Pay transaction fees with sBTC**: Users no longer need to hold STX to pay for transactions. All fees can be paid directly in sBTC.
+2. **Instant transfers**: Transactions between Bolt wallets are confirmed instantly, avoiding the typical Stacks blockchain confirmation times.
 
-Any dApp or wallet on Stacks can integrate Bolt Protocol to enable instant transactions and eliminate the friction of paying transaction fees with STX.
+> Note: Bolt Protocol currently supports only sBTC. Support for other SIP-10 tokens will be added in future releases.
 
-> Note: The current version (v1) only supports sBTC. Support for other SIP-10 tokens will be added in future releases.
-
-We also offer a demo dApp on our website for users who want to try it out:
+We offer a Bolt Wallet implementation on our website for users to use:
 
 * **Website**: [https://boltproto.org/](https://boltproto.org/)
+> Note: This is a Bolt Wallet implementation. To pay transaction fees in other dApps using sBTC, you'll need a wallet that integrates with Bolt Protocol.
+
+## How It Works
+
+The [Bolt Wallet](https://boltproto.org/) lets you connect any Stacks wallet and experience the benefits of the protocol:
+
+1. **Deposit**: Transfer your sBTC to your Bolt Wallet
+2. **Transfer**: Send sBTC between Bolt Wallets instantly
+3. **Withdraw**: Move your tokens back to your Stacks wallet
+
+All operations within the dApp require only sBTC—no STX is needed for transaction fees.
+
+To use sBTC for paying transaction fees in third-party dApps, you need to:
+1. Use a wallet that supports Bolt Protocol
+2. Top up your Fee Fund with sBTC, which will be used to pay for transaction fees across the Stacks ecosystem
 
 # Contact Us
 
 * **X (Twitter)**: [@boltprotobtc](https://x.com/boltprotobtc)
 
+# Integration Options
+
+## For Wallets
+
+Wallets can seamlessly implement integration with Bolt Protocol, allowing their users to pay transaction fees with sBTC instead of STX and access instant transfers.
+
+## For dApps
+
+Even if users' wallets don't natively support Bolt Protocol, dApps can implement support directly. This allows any dApp to offer users the ability to pay transaction fees with sBTC, improving user experience and increasing adoption.
 
 ## Key Features
 
@@ -31,7 +55,7 @@ We also offer a demo dApp on our website for users who want to try it out:
 -   **Operator Model:** The protocol utilizes an operator that is responsible for coordinating and finalizing transactions on Stacks.
 -   **No Channel Required:** Unlike other Bitcoin scaling solutions, Bolt Protocol doesn't require users to create channels, improving the user experience.
 
-## Architecture
+## How Bolt Protocol Works
 
 ```pgsql
                            |
@@ -55,12 +79,12 @@ We also offer a demo dApp on our website for users who want to try it out:
         +-----------------------------------+
 ```
 
-## Main functions of the Smart Contract (v1)
+## Main functions of the Smart Contract (v2)
 
-Contract address on Testnet:
+Contract address on Mainnet:
 
 ```
-ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF.boltproto-sbtc-rc-1-1-0
+[SP3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02ZHQCMVJ.boltproto-sbtc-v2](https://explorer.hiro.so/txid/SP3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02ZHQCMVJ.boltproto-sbtc-v2?chain=mainnet)
 ```
 
 ## Non-Sponsored Functions
@@ -190,7 +214,6 @@ Response:
 }
 ```
 
-
 The response includes pagination details and a list of transaction items with the following fields:
 - `txId`: The transaction identifier- `token`: The token type (currently only "sbtc-token")
 - `amount`: Transaction amount in satoshis
@@ -222,17 +245,16 @@ Response:
 }
 ```
 
+## Roadmap
 
-## Network Availability
+Here are the next steps planned for Bolt Protocol:
 
-Bolt Protocol is currently operational on Testnet. Mainnet support is coming soon.
+1. **Fee Optimization**: Improve the fee calculation mechanism for sBTC transactions to ensure optimal efficiency and cost-effectiveness.
 
-<!-- ## Roadmap
+2. **Wallet Integration**: Implement Bolt Protocol support in major Stacks wallets:
+   - Leather Wallet integration
+   - XVerse Wallet integration
 
-[List of planned future features]
-
-## Security Considerations
-
-[Detailed explanation of security assumptions, risks, and mitigations] -->
+3. **Governance Model**: Introduce a governance token to decentralize the protocol's decision-making process and allow community participation in the protocol's evolution.
 
 
