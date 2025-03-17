@@ -1,6 +1,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Title: Bolt Contract - sBTC
-;; Version: boltproto-sbtc-v0-3-0
+;; Version: boltproto-sbtc-v2-0-0
 ;; Summary: A smart contract for fast, secure token transfers with signature verification.
 ;; Website: https://boltproto.org
 ;;
@@ -80,6 +80,11 @@
 ;;   The principal authorized to withdraw tokens from the governance treasury.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (define-data-var governance-withdrawer principal tx-sender)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Fund used to sponsor the Stacks transaction fee
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(define-data-var contract-fee-fund uint u0)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Data Maps:
@@ -167,6 +172,9 @@
 
 (define-read-only (get-governance-fee-ratio)
     (var-get governance-fee-ratio))
+
+(define-read-only (get-contract-fee-fund)
+    (var-get contract-fee-fund))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Public Functions:
@@ -675,3 +683,60 @@
         (asserts! (is-eq tx-sender (var-get contract-manager)) ERR-NOT-MANAGER)
         (var-set blocks-to-withdraw blocks)
         (ok true)))
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; deposit-fee-fund:
+;;   Deposits funds to use to pay fees for the transactions
+;;   Parameters:
+;;     amount: uint  The amount to deposit.
+;;     fee: uint     The fee amount to split between governance and operator treasuries.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(define-public (deposit-fee-fund (amount uint) (fee uint))
+    (begin
+        (asserts! (is-eq (unwrap! tx-sponsor? ERR-NO-OPERATOR) (var-get sponsor-operator)) ERR-UNAUTHORIZED-SPONSOR-OPERATOR)
+        (asserts! (> amount u0) ERR-PRECONDITION-FAILED)
+
+        ;; Transfer the total amount (including fee) to the contract
+        (try! (contract-call? .sbtc-token transfer (+ amount fee) tx-sender (as-contract tx-sender) none))
+        
+        ;; Update the contract fee fund with the amount
+        (var-set contract-fee-fund (+ (var-get contract-fee-fund) amount))
+        
+        ;; Split the fee between governance and operator treasuries
+        (split-fee fee)
+        
+        (print {
+            event: "deposit-fee-fund",
+            sender: tx-sender,
+            amount: amount,
+            fee: fee
+        })
+        (ok true)
+    )
+)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; consume-fee-fund:
+;;   Consumes funds from the fee fund to pay for the transaction fee
+;;   Parameters:
+;;     amount: uint  The amount to consume from the fee fund.
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(define-public (consume-fee-fund (amount uint))
+    (begin
+        (asserts! (is-eq tx-sender (var-get fee-collector-operator)) ERR-UNAUTHORIZED-FEE-COLLECTOR)
+        (asserts! (>= (var-get contract-fee-fund) amount) ERR-INSUFFICIENT-FUNDS)
+        
+        ;; Update contract fee fund balance
+        (var-set contract-fee-fund (- (var-get contract-fee-fund) amount))
+        
+        ;; Add the used amount to treasuries
+        (split-fee amount)
+        
+        (print {
+            event: "use-fee-fund",
+            amount: amount,
+            operator: tx-sender
+        })
+        (ok true)
+    )
+)
