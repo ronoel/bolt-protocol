@@ -17,6 +17,11 @@ We offer a Bolt Wallet implementation on our website for users to use:
 * **Website**: [https://boltproto.org/](https://boltproto.org/)
 > Note: This is a Bolt Wallet implementation. To pay transaction fees in other dApps using sBTC, you'll need a wallet that integrates with Bolt Protocol.
 
+* **Wallet Extension** [Github Repository](https://github.com/ronoel/leather-io-extension)
+
+> Note: The current version of this extension is just a proof of concept for the Bolt Protocol integration, allowing you to pay transaction fees with sBTC on the Stacks Blockchain.
+
+
 ## How It Works
 
 The [Bolt Wallet](https://boltproto.org/) lets you connect any Stacks wallet and experience the benefits of the protocol:
