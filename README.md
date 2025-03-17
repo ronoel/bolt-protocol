@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://storage.googleapis.com/bitfund/boltproto-icon.png" width="200" alt="Bolt Protocol Logo">
+  <img src="https://storage.googleapis.com/bitfund/boltproto-icon.png" width="100" alt="Bolt Protocol Logo">
 </p>
 
 # Bolt Protocol
@@ -20,6 +20,12 @@ We offer a Bolt Wallet implementation on our website for users to use:
 * **Wallet Extension** [Github Repository](https://github.com/ronoel/leather-io-extension)
 
 > Note: The current version of this extension is just a proof of concept for the Bolt Protocol integration, allowing you to pay transaction fees with sBTC on the Stacks Blockchain.
+
+## Demo Video
+
+Watch our demo showcasing:
+
+[![Bolt Protocol Demo](https://img.youtube.com/vi/GtUmMsOsCnE/0.jpg)](https://youtu.be/GtUmMsOsCnE)
 
 
 ## How It Works
