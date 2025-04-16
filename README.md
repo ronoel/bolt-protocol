@@ -234,6 +234,38 @@ The response includes pagination details and a list of transaction items with th
 - `functionName`: The smart contract function used
 - `timestamp`: Transaction timestamp
 
+### Fee Calculation in sBTC
+
+To estimate the fee in sBTC:
+
+1. **Get the estimated fee in microSTX** for your contract call (using standard Stacks fee estimation).
+2. **Fetch the current fee rate** by making a GET request:
+
+    ```http
+    GET https://boltproto.org/api/v1/transaction/sbtc-token/fee-rate
+    ```
+
+    Example response:
+    ```json
+    {
+        "feeRate": 200
+    }
+    ```
+
+3. **Calculate the sBTC fee** by dividing the estimated fee in microSTX by the `feeRate` value:
+
+    ```
+    sBTC fee (in sats) = estimated fee in microSTX / feeRate
+    ```
+
+    For example, if the estimated fee is `4,000` microSTX and the `feeRate` is `200`:
+
+    ```
+    sBTC fee = 4,000 / 200 = 20 sats
+    ```
+
+> The minimum fee accepted by the protocol is 10 satoshis.
+
 ### Submit Transaction
 
 Submits a serialized transaction to the Bolt Protocol.
