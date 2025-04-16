@@ -139,8 +139,6 @@ This function initiates a withdrawal request with timelock protection. The trans
 
 These functions are sponsored by the Bolt Protocol operator, allowing users to pay fees in sBTC instead of STX. All sponsored functions must be submitted through the Bolt API.
 
-> Note: The minimum fee accepted by the protocol is 10 satoshis.
-> 
 > [See example implementation](cookbook/transfer-stacks-to-stacks.md)
 
 ### Transfer Function Matrix
@@ -273,8 +271,6 @@ To estimate the fee in sBTC:
     ```
     sBTC fee = 4,000 / 200 = 20 sats
     ```
-
-> The minimum fee accepted by the protocol is 10 satoshis.
 
 ### Submit Transaction
 
