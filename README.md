@@ -94,11 +94,15 @@ Even if users' wallets don't natively support Bolt Protocol, dApps can implement
 
 Contract address on Mainnet:
 
-```
 [SP3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02ZHQCMVJ.boltproto-sbtc-v2](https://explorer.hiro.so/txid/SP3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02ZHQCMVJ.boltproto-sbtc-v2?chain=mainnet)
-```
 
-## Non-Sponsored Functions
+
+Contract address on Testnet:
+
+[ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF.boltproto-sbtc-rc-2-0-0](https://explorer.hiro.so/txid/ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF.boltproto-sbtc-rc-2-0-0?chain=testnet)
+
+
+<!-- ## Non-Sponsored Functions
 
 These functions must be submitted directly to the Stacks blockchain and require STX for transaction fees.
 
@@ -128,9 +132,10 @@ This function initiates a withdrawal request with timelock protection. The trans
 ;;     amount: uint  The amount to request for withdrawal.
 (request-withdrawal 
     (amount uint))
-```
+``` -->
 
-## Sponsored Functions
+<!-- ## Sponsored Functions -->
+## Contract Functions
 
 These functions are sponsored by the Bolt Protocol operator, allowing users to pay fees in sBTC instead of STX. All sponsored functions must be submitted through the Bolt API.
 
@@ -169,6 +174,11 @@ Function descriptions:
 - `transfer-stacks-to-stacks`: Direct transfer between Stacks wallets
 
 ## Bolt API (v1)
+
+**API Endpoints:**
+
+- **Mainnet:** `https://boltproto.org/api/v1`
+- **Testnet:** `https://test.boltproto.org/api/v1`
 
 ### Get Wallet Balance
 
