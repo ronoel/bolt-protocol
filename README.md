@@ -27,6 +27,7 @@ Watch our demo showcasing:
 
 [![Bolt Protocol Demo](https://img.youtube.com/vi/GtUmMsOsCnE/0.jpg)](https://youtu.be/GtUmMsOsCnE)
 
+---
 
 ## How It Works
 
@@ -38,23 +39,47 @@ The [Bolt Wallet](https://boltproto.org/) lets you connect any Stacks wallet and
 
 All operations within the dApp require only sBTC—no STX is needed for transaction fees.
 
-To use sBTC for paying transaction fees in third-party dApps, you need to:
-1. Use a wallet that supports Bolt Protocol
-2. Top up your Fee Fund with sBTC, which will be used to pay for transaction fees across the Stacks ecosystem
+---
+
+# Integration Overview
+
+Bolt Protocol enables two main integration paths for developers and wallets:
+
+### 1. Native sBTC Transfers (Bolt Contract Functions)
+
+Use Bolt Protocol's smart contract to transfer sBTC between wallets, with fees paid in sBTC and enable instant transfers.
+
+- See [Native sBTC Transfer Guide](cookbook/transfer-stacks-to-stacks.md) for example usage.
+
+### 2. Pay Transaction Fees with sBTC for Any Contract
+
+Use Bolt Protocol to pay transaction fees in sBTC for *any* contract call on the Stacks blockchain. This allows wallets to offer a seamless experience where users never need STX for gas, even when interacting with third-party contracts.
+
+- See [How to Pay Transaction Fees with sBTC for Any Contract](guides/pay-fee-with-sbtc.md) for integration steps.
+
+---
 
 # Contact Us
 
 * **X (Twitter)**: [@boltprotobtc](https://x.com/boltprotobtc)
 
-# Integration Options
+---
+
+# Integration Details
 
 ## For Wallets
 
-Wallets can seamlessly implement integration with Bolt Protocol, allowing their users to pay transaction fees with sBTC instead of STX and access instant transfers.
+Wallets can integrate Bolt Protocol to:
+- Allow users to pay transaction fees with sBTC instead of STX
+- Enable instant sBTC transfers between Bolt wallets
+
+Refer to the guides above for implementation details.
 
 ## For dApps
 
-Even if users' wallets don't natively support Bolt Protocol, dApps can implement support directly. This allows any dApp to offer users the ability to pay transaction fees with sBTC, improving user experience and increasing adoption.
+dApps can support Bolt Protocol directly, enabling users to pay fees in sBTC even if their wallet does not natively support Bolt.
+
+---
 
 ## Key Features
 
@@ -65,6 +90,8 @@ Even if users' wallets don't natively support Bolt Protocol, dApps can implement
 -   **Smart Contract:** Ensures a controlled environment where Bolt Protocol can quickly verify and process transactions, then persist them on-chain.
 -   **Operator Model:** The protocol utilizes an operator that is responsible for coordinating and finalizing transactions on Stacks.
 -   **No Channel Required:** Unlike other Bitcoin scaling solutions, Bolt Protocol doesn't require users to create channels, improving the user experience.
+
+---
 
 ## How Bolt Protocol Works
 
@@ -90,52 +117,21 @@ Even if users' wallets don't natively support Bolt Protocol, dApps can implement
         +-----------------------------------+
 ```
 
+---
+
 ## Main functions of the Smart Contract (v2)
 
 Contract address on Mainnet:
 
 [SP3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02ZHQCMVJ.boltproto-sbtc-v2](https://explorer.hiro.so/txid/SP3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02ZHQCMVJ.boltproto-sbtc-v2?chain=mainnet)
 
-
 Contract address on Testnet:
 
 [ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF.boltproto-sbtc-rc-2-0-0](https://explorer.hiro.so/txid/ST3QZNX3CGT6V7PE1PBK17FCRK1TP1AT02W1N0YJF.boltproto-sbtc-rc-2-0-0?chain=testnet)
 
+---
 
-<!-- ## Non-Sponsored Functions
-
-These functions must be submitted directly to the Stacks blockchain and require STX for transaction fees.
-
-### 1. Deposit Funds on Bolt Contract
-
-This function allows users to deposit sBTC into the Bolt Contract. The transaction requires STX for network fees and is processed directly on the Stacks blockchain.
-
-```lisp
-;;   Deposits tokens into a recipients wallet.
-;;   Parameters:
-;;     amount: uint                   The amount to deposit.
-;;     recipient: principal           The recipient wallet.
-;;     memo: (optional (buff 34))      Optional memo.
-(deposit
-    (amount uint)
-    (recipient principal)
-    (memo (optional (buff 34))))
-```
-
-### 2. Withdraw Funds from Bolt Contract
-
-This function initiates a withdrawal request with timelock protection. The transaction requires STX for network fees and is processed directly on the Stacks blockchain.
-
-```lisp
-;;   Initiates a withdrawal request with timelock protection.
-;;   Parameters:
-;;     amount: uint  The amount to request for withdrawal.
-(request-withdrawal 
-    (amount uint))
-``` -->
-
-<!-- ## Sponsored Functions -->
-## Contract Functions
+## Contract Functions: Native sBTC Transfers
 
 These functions are sponsored by the Bolt Protocol operator, allowing users to pay fees in sBTC instead of STX. All sponsored functions must be submitted through the Bolt API.
 
@@ -170,6 +166,16 @@ Function descriptions:
 - `transfer-bolt-to-stacks`: Transfer from Bolt Protocol to Stacks wallet
 - `transfer-stacks-to-bolt`: Deposit from Stacks wallet to Bolt Protocol
 - `transfer-stacks-to-stacks`: Direct transfer between Stacks wallets
+
+---
+
+## Pay Transaction Fees with sBTC for Any Contract
+
+Bolt Protocol enables users to pay transaction fees in sBTC for contract calls to *any* Stacks smart contract, not just Bolt's own contract.
+
+- See [How to Pay Transaction Fees with sBTC for Any Contract](guides/pay-fee-with-sbtc.md) for a step-by-step integration guide.
+
+---
 
 ## Bolt API (v1)
 
@@ -293,6 +299,8 @@ Response:
         "txid": "5bed517eb7b58082d39df49240b75f1246584cd56a1b1af69c64295b86334291"
 }
 ```
+
+---
 
 ## Roadmap
 
