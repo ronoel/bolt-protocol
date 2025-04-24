@@ -51,11 +51,11 @@ Use Bolt Protocol's smart contract to transfer sBTC between wallets, with fees p
 
 - See [Native sBTC Transfer Guide](cookbook/transfer-stacks-to-stacks.md) for example usage.
 
-### 2. Pay Transaction Fees with sBTC for Any Contract
+### 2. Enable Users to Pay Transaction Fees with sBTC for Any Contract
 
-Use Bolt Protocol to pay transaction fees in sBTC for *any* contract call on the Stacks blockchain. This allows wallets to offer a seamless experience where users never need STX for gas, even when interacting with third-party contracts.
+Integrate Bolt Protocol into your wallet to allow users to pay transaction fees with sBTC (instead of STX) for *any* contract call on the Stacks blockchain. This enables a seamless experience where users never need STX for gas, even when interacting with third-party contracts. Users must deposit sBTC into their Fee Fund to use this feature.
 
-- See [How to Pay Transaction Fees with sBTC for Any Contract](guides/pay-fee-with-sbtc.md) for integration steps.
+- See [How to Enable Users to Pay Transaction Fees with sBTC in Your Wallet on Stacks](guides/pay-fee-with-sbtc.md) for integration steps.
 
 ---
 
@@ -169,11 +169,11 @@ Function descriptions:
 
 ---
 
-## Pay Transaction Fees with sBTC for Any Contract
+## Enable Users to Pay Transaction Fees with sBTC for Any Contract
 
-Bolt Protocol enables users to pay transaction fees in sBTC for contract calls to *any* Stacks smart contract, not just Bolt's own contract.
+Bolt Protocol enables wallets to let users pay transaction fees in sBTC for contract calls to *any* Stacks smart contract, not just Bolt's own contract. Users must deposit sBTC into their Fee Fund to use this feature.
 
-- See [How to Pay Transaction Fees with sBTC for Any Contract](guides/pay-fee-with-sbtc.md) for a step-by-step integration guide.
+- See [How to Enable Users to Pay Transaction Fees with sBTC in Your Wallet on Stacks](guides/pay-fee-with-sbtc.md) for a step-by-step integration guide.
 
 ---
 

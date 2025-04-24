@@ -1,18 +1,18 @@
-# How to Pay Transaction Fees with sBTC for Any Contract
+# How to Enable Users to Pay Transaction Fees with sBTC in Your Wallet on Stacks
 
-This guide explains how wallets and dApps can use Bolt Protocol to submit contract calls to *any* Stacks smart contract, paying transaction fees in sBTC instead of STX.
+This guide explains how wallet developers can integrate Bolt Protocol to allow users to pay transaction fees with sBTC (instead of STX) for *any* Stacks smart contract call.
 
 ---
 
 ## Overview
 
-Bolt Protocol enables wallets and users to pay transaction fees in sBTC for any contract call on the Stacks blockchain. Users deposit sBTC into a personal Fee Fund managed by Bolt, and all transactions submitted through the Bolt API will consume fees from this fund.
+Bolt Protocol enables wallets to let users pay transaction fees in sBTC for any contract call on the Stacks blockchain. Users deposit sBTC into a personal Fee Fund managed by Bolt, and all transactions submitted through the Bolt API will consume fees from this fund.
 
 ---
 
-## Step 1: Top Up Your Fee Fund
+## Step 1: Top Up the User's Fee Fund
 
-To pay transaction fees in sBTC, you must first deposit sBTC into your Fee Fund.
+To pay transaction fees in sBTC, users must first deposit sBTC into their Fee Fund.
 
 Call the `deposit-fee-fund` function on the Bolt Protocol smart contract:
 
@@ -80,9 +80,9 @@ async function depositFeeFund() {
 
 ---
 
-## Step 2: Check Your Fee Fund Balance
+## Step 2: Check the User's Fee Fund Balance
 
-Query your Fee Fund balance via the Bolt API:
+Query the user's Fee Fund balance via the Bolt API:
 
 ```http
 GET /api/v1/sponsor/sbtc-token/balance/{address}
@@ -101,7 +101,7 @@ Example response:
 
 To submit a contract call and pay the transaction fee in sBTC:
 
-1. Construct your contract call transaction as usual.
+1. Construct the contract call transaction as usual.
 2. Set the transaction option `sponsored: true`.
 3. Calculate and specify the transaction fee in sBTC.
 4. Submit the serialized transaction to the Bolt Protocol endpoint:
@@ -130,7 +130,7 @@ API response:
 
 ## Important Notes
 
-- Ensure your Fee Fund has sufficient balance for transaction fees.
+- Ensure the user's Fee Fund has sufficient balance for transaction fees.
 - This method works for *any* contract call.
 - See the [Bolt Protocol GitHub](https://github.com/ronoel/leather-io-extension) for wallet integration examples.
 
