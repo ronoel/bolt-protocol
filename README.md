@@ -35,7 +35,7 @@ Bolt Protocol solves two critical pain points for Stacks users:
 We offer a Bolt Wallet implementation on our website for users to use:
 
 * **Bolt Wallet**: [https://boltproto.org/wallet](https://boltproto.org/wallet)
-> Note: This is a Bolt Wallet implementation. To pay transaction fees in other dApps using sBTC, you'll need a wallet that integrates with Bolt Protocol.
+> Note: This is a Bolt Wallet implementation (dApp) to transfer sBTC between wallets (instant transfers and Stacks transfer). To pay transaction fees in other dApps using sBTC, you'll need a wallet that integrates with Bolt Protocol like "Wallet Extension".
 
 * **Wallet Extension** [Github Repository](https://github.com/ronoel/leather-io-extension)
 
