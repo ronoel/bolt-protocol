@@ -4,7 +4,25 @@
 
 # Bolt Protocol
 
-Bolt Protocol is designed to improve the user experience for wallets and dApps on the Stacks blockchain.
+Bolt Protocol unlocks seamless Bitcoin utility across the Stacks ecosystem. By enabling users to pay fees directly in sBTC, Bolt removes the friction of dual-token systems and brings pure-Bitcoin flow to smart contracts, games, and dApps.
+No STX required. No extra steps. Just Bitcoin — fast, efficient, and secure.
+
+Power your app with Bolt. Build for the Bitcoin era.
+
+## Table of Contents
+- [Overview](#bolt-protocol)
+- [Key Features](#key-features)
+- [Demo Video](#demo-video)
+- [How It Works](#how-it-works)
+- [Integration Overview](#integration-overview)
+- [Integration Details](#integration-details)
+  - [For Wallets](#for-wallets)
+  - [For dApps](#for-dapps)
+- [Smart Contract](#main-functions-of-the-smart-contract-v2)
+- [Contract Functions](#contract-functions-native-sbtc-transfers)
+- [Bolt API](#bolt-api-v1)
+- [Roadmap](#roadmap)
+- [Contact Us](#contact-us)
 
 Bolt Protocol solves two critical pain points for Stacks users:
 1. **Pay transaction fees with sBTC**: Users no longer need to hold STX to pay for transactions. All fees can be paid directly in sBTC.
@@ -23,7 +41,7 @@ We offer a Bolt Wallet implementation on our website for users to use:
 
 ## Demo Video
 
-Watch our demo showcasing:
+Watch our demonstration video that showcases how Bolt Protocol enables seamless Bitcoin transactions on the Stacks blockchain:
 
 [![Bolt Protocol Demo](https://img.youtube.com/vi/GtUmMsOsCnE/0.jpg)](https://youtu.be/GtUmMsOsCnE)
 
@@ -56,12 +74,6 @@ Use Bolt Protocol's smart contract to transfer sBTC between wallets, with fees p
 Integrate Bolt Protocol into your wallet to allow users to pay transaction fees with sBTC (instead of STX) for *any* contract call on the Stacks blockchain. This enables a seamless experience where users never need STX for gas, even when interacting with third-party contracts. Users must deposit sBTC into their Fee Fund to use this feature.
 
 - See [How to Enable Users to Pay Transaction Fees with sBTC in Your Wallet on Stacks](guides/pay-fee-with-sbtc.md) for integration steps.
-
----
-
-# Contact Us
-
-* **X (Twitter)**: [@boltprotobtc](https://x.com/boltprotobtc)
 
 ---
 
@@ -302,16 +314,57 @@ Response:
 
 ---
 
-## Roadmap
+# Roadmap
 
-Here are the next steps planned for Bolt Protocol:
+---
 
-1. **Fee Optimization**: Improve the fee calculation mechanism for sBTC transactions to ensure optimal efficiency and cost-effectiveness.
+## ✅ Phase 1: MVP & Core Infrastructure (✅ Completed / In Progress)
 
-2. **Wallet Integration**: Implement Bolt Protocol support in major Stacks wallets:
-   - Leather Wallet integration
-   - XVerse Wallet integration
+**🎯 Goal:** Launch the base protocol and demonstrate its utility.
 
-3. **Governance Model**: Introduce a governance token to decentralize the protocol's decision-making process and allow community participation in the protocol's evolution.
+- ✅ Implement Bolt Protocol smart contracts on Stacks  
+- ✅ Enable sBTC as gas (pay fees in sBTC, not STX)  
+- ✅ Release Bolt Wallet demo with instant sBTC transfers  
+- ✅ Open-source reference integrations for developers  
 
+---
 
+## ⚙️ Phase 2: Developer Ecosystem & Wallet Integrations  
+**🗓 Short-Term: Q2 2025**  
+**🎯 Goal:** Build momentum with developers and strengthen infrastructure.
+
+- ✅ Launch Portal (docs, showcase, access points)  
+- ✅ Track usage metrics  
+- ✅ Launch demo apps:  
+  - ✅ Block Constellation — first 100% sBTC game  
+- 🔄 Add support for wallet integrations (Boom, Xverse, Leather...) *(in progress)*  
+- 🔄 Community outreach to align with Stacks app developers  
+
+---
+
+## 🌐 Phase 3: Ecosystem Expansion & Incentivization  
+**🗓 Mid-Term: Q3–Q4 2025**  
+**🎯 Goal:** Scale usage and introduce governance mechanisms.
+
+- [ ] Launch Bolt DAO for governance and upgrades  
+- [ ] Enable staking & rewards  
+- [ ] Onboard partner apps: DeFi, marketplaces, tools  
+- [ ] Launch incentive program for developers (grants, rewards)  
+- [ ] Gamified ecosystem incentives (e.g. XP for transactions)  
+- [ ] Run hackathons and workshops for new use cases  
+
+---
+
+## 🌍 Phase 4: Multi-Token Support  
+**🗓 Long-Term: Q4 2025+**  
+**🎯 Goal:** Establish Bolt as the default transaction layer on Bitcoin + expand token support.
+
+- [ ] Expand Bolt Protocol to support other tokens (e.g. USDh, stablecoins)  
+
+---
+
+# Contact Us
+
+* **X (Twitter)**: [@boltprotobtc](https://x.com/boltprotobtc)
+
+---
