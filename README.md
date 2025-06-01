@@ -9,6 +9,8 @@ No STX required. No extra steps. Just Bitcoin — fast, efficient, and secure.
 
 Power your app with Bolt. Build for the Bitcoin era.
 
+* **Website**: [https://boltproto.org/](https://boltproto.org/)
+
 ## Table of Contents
 - [Overview](#bolt-protocol)
 - [Key Features](#key-features)
@@ -32,7 +34,7 @@ Bolt Protocol solves two critical pain points for Stacks users:
 
 We offer a Bolt Wallet implementation on our website for users to use:
 
-* **Website**: [https://boltproto.org/](https://boltproto.org/)
+* **Bolt Wallet**: [https://boltproto.org/wallet](https://boltproto.org/wallet)
 > Note: This is a Bolt Wallet implementation. To pay transaction fees in other dApps using sBTC, you'll need a wallet that integrates with Bolt Protocol.
 
 * **Wallet Extension** [Github Repository](https://github.com/ronoel/leather-io-extension)
