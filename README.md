@@ -41,6 +41,28 @@ We offer a Bolt Wallet implementation on our website for users to use:
 
 > Note: The current version of this extension is just a proof of concept for the Bolt Protocol integration, allowing you to pay transaction fees with sBTC on the Stacks Blockchain.
 
+---
+
+## How Bolt Protocol Works
+
+<p align="center">
+  <img src="https://github.com/ronoel/bolt-protocol/blob/main/bolt-protocol-diagram.jpg" width="600" alt="Bolt Protocol Architecture">
+</p>
+
+The architecture shows how Bolt Protocol serves as a layer between dApps, wallets, and the blockchain:
+
+1. **dApps** connect directly to Bolt Protocol through the API or via wallet integrations
+2. **Wallets** can integrate with Bolt to provide sBTC fee payment capabilities
+3. **The Operator** handles three core functions:
+   - Standard sBTC transfers
+   - Instant sBTC transfers between Bolt wallets
+   - sBTC transaction fee payment for any contract
+4. **Smart Contract** provides the secure foundation for all operations
+
+This design allows users to interact with any Stacks dApp while paying fees in sBTC instead of STX, creating a seamless Bitcoin-native experience.
+
+---
+
 ## Demo Video
 
 Watch our demonstration video that showcases how Bolt Protocol enables seamless Bitcoin transactions on the Stacks blockchain:
@@ -104,26 +126,6 @@ dApps can support Bolt Protocol directly, enabling users to pay fees in sBTC eve
 -   **Smart Contract:** Ensures a controlled environment where Bolt Protocol can quickly verify and process transactions, then persist them on-chain.
 -   **Operator Model:** The protocol utilizes an operator that is responsible for coordinating and finalizing transactions on Stacks.
 -   **No Channel Required:** Unlike other Bitcoin scaling solutions, Bolt Protocol doesn't require users to create channels, improving the user experience.
-
----
-
-## How Bolt Protocol Works
-
-<p align="center">
-  <img src="https://github.com/ronoel/bolt-protocol/blob/main/bolt-protocol-diagram.jpg" width="600" alt="Bolt Protocol Architecture">
-</p>
-
-The architecture shows how Bolt Protocol serves as a layer between dApps, wallets, and the blockchain:
-
-1. **dApps** connect directly to Bolt Protocol through the API or via wallet integrations
-2. **Wallets** can integrate with Bolt to provide sBTC fee payment capabilities
-3. **The Operator** handles three core functions:
-   - Standard sBTC transfers
-   - Instant sBTC transfers between Bolt wallets
-   - sBTC transaction fee payment for any contract
-4. **Smart Contract** provides the secure foundation for all operations
-
-This design allows users to interact with any Stacks dApp while paying fees in sBTC instead of STX, creating a seamless Bitcoin-native experience.
 
 ---
 
