@@ -110,7 +110,7 @@ dApps can support Bolt Protocol directly, enabling users to pay fees in sBTC eve
 ## How Bolt Protocol Works
 
 <p align="center">
-  <img src="https://storage.googleapis.com/bitfund/bolt-protocol-architecture.png" width="600" alt="Bolt Protocol Architecture">
+  <img src="https://github.com/ronoel/bolt-protocol/blob/main/bolt-protocol-diagram.jpg" width="600" alt="Bolt Protocol Architecture">
 </p>
 
 The architecture shows how Bolt Protocol serves as a layer between dApps, wallets, and the blockchain:
