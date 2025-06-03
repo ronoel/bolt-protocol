@@ -109,27 +109,21 @@ dApps can support Bolt Protocol directly, enabling users to pay fees in sBTC eve
 
 ## How Bolt Protocol Works
 
-```pgsql
-                           |
-                           | (1) Deposit sBTC
-                           |     into contract
-            +--------------v-------------+
-            |       Smart Contract       |
-            +--------------+-------------+
-                           |
-                           | (2) & (3) Transfer sBTC
-                           v
-            +------------------------------+
-            |          Operator            |
-            | (Processes transactions)     |
-            +------------------------------+
-                           | (4) Confirm transaction
-                           | (5) Submit final transaction
-                           v
-        +-----------------------------------+
-        |         Stacks Blockchain         |
-        +-----------------------------------+
-```
+<p align="center">
+  <img src="https://storage.googleapis.com/bitfund/bolt-protocol-architecture.png" width="600" alt="Bolt Protocol Architecture">
+</p>
+
+The architecture shows how Bolt Protocol serves as a layer between dApps, wallets, and the blockchain:
+
+1. **dApps** connect directly to Bolt Protocol through the API or via wallet integrations
+2. **Wallets** can integrate with Bolt to provide sBTC fee payment capabilities
+3. **The Operator** handles three core functions:
+   - Standard sBTC transfers
+   - Instant sBTC transfers between Bolt wallets
+   - sBTC transaction fee payment for any contract
+4. **Smart Contract** provides the secure foundation for all operations
+
+This design allows users to interact with any Stacks dApp while paying fees in sBTC instead of STX, creating a seamless Bitcoin-native experience.
 
 ---
 
