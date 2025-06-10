@@ -316,7 +316,7 @@ Response:
 
 ---
 
-## ✅ Phase 1: MVP & Core Infrastructure (✅ Completed / In Progress)
+## ✅ Phase 1: MVP & Core Infrastructure
 
 **🎯 Goal:** Launch the base protocol and demonstrate its utility.
 
@@ -347,8 +347,8 @@ Response:
 - [ ] Launch Bolt DAO for governance and upgrades  
 - [ ] Enable staking & rewards  
 - [ ] Onboard partner apps: DeFi, marketplaces, tools  
-- [ ] Launch incentive program for developers (grants, rewards)  
-- [ ] Gamified ecosystem incentives (e.g. XP for transactions)  
+- [ ] Promote Bolt + Stacks as a Lightning Alternative for Bitcoin scaling
+- [ ] Launch incentive program for developers (grants, rewards)
 - [ ] Run hackathons and workshops for new use cases  
 
 ---
