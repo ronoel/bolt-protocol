@@ -1,0 +1,35 @@
+<div class="dialog-container">
+    <h2>
+        @if (currentStatus === 'success') {
+        <mat-icon class="success-icon">check_circle</mat-icon>
+        } @else {
+        <mat-icon class="error-icon">error</mat-icon>
+        }
+        {{boltTransaction.title}}
+    </h2>
+    <div class="dialog-content">
+        <p class="status">{{getStatusTitle()}}</p>
+        @if (currentStatus === 'success') {
+        <p class="tx-id">
+            Transaction ID: <span class="mono">{{boltTransaction.transaction.txid}}</span>
+        </p>
+        <div class="status-info">
+            <p>
+                Your transaction has been processed by Bolt Protocol. 
+                <!-- You can verify it on chain using the link below: -->
+            </p>
+            <!-- <a [href]="uri" target="_blank" class="explorer-link">
+                View transaction on chain
+                <mat-icon>open_in_new</mat-icon>
+            </a> -->
+        </div>
+        } @else {
+        <div class="status-info">
+            <p>
+                {{boltTransaction.transaction.error}}
+            </p>
+        </div>
+        }
+        <button class="btn-primary" (click)="onComplete()">OK</button>
+    </div>
+</div>

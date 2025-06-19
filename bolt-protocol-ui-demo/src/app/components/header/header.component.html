@@ -1,0 +1,21 @@
+<header class="app-header">
+  <a routerLink="/" class="logo">
+    <img src="/assets/images/bolt-icon.png" alt="BitFund (BTF)">
+    <span>BoltProto</span>
+  </a>
+  <div class="wallet-section">
+    @if (!isLoggedIn) {
+      <button mat-flat-button color="primary" (click)="connectWallet()">
+        <mat-icon>account_balance_wallet</mat-icon>
+        Connect wallet
+      </button>
+    } @else {
+      <div class="wallet-info">
+        <button mat-flat-button color="accent" (click)="showDisconnectPrompt()">
+          <mat-icon>logout</mat-icon>
+          {{identityAddress | slice:0:4}}...{{identityAddress | slice:37}}
+        </button>
+      </div>
+    }
+  </div>
+</header>

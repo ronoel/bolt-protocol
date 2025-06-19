@@ -1,0 +1,41 @@
+.app-header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #151b27;
+    border-bottom: 1px solid #2a2f3a;
+    height: 64px; // Fixed height for header
+    box-sizing: border-box;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+  text-decoration: none;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  img {
+    height: 32px;
+    width: auto;
+  }
+
+  @media (max-width: 480px) {
+    span {
+      display: none;
+    }
+  }
+}

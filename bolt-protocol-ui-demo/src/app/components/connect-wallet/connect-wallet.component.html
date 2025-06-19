@@ -1,0 +1,13 @@
+@if(!isLoggedIn){
+<div class="connect-wallet-container">
+    <div class="connect-wallet-inner">
+        <div class="connect-wallet-text">
+            <h3>Connect your wallet</h3>
+            <p>{{description}}</p>
+        </div>
+        <div class="connect-wallet-action">
+            <button mat-flat-button color="primary" (click)="connectWallet()">Connect</button>
+        </div>
+    </div>
+</div>
+}

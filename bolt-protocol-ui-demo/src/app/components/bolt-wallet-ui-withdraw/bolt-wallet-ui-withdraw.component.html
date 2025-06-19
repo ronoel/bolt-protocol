@@ -1,0 +1,77 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Withdraw to Stacks Wallet</h2>
+      <button class="close-button" (click)="closeModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="modal-content">
+      @if (isProcessing) {
+        <div class="loading-spinner">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Processing transaction...</p>
+        </div>
+      } @else {
+        <form class="transfer-form" (ngSubmit)="onSubmit()">
+          <div class="balance-info">
+            <span class="label">Available in Bolt Wallet</span>
+            <span class="value">{{ formatBalanceForDisplay(boltWalletBalance) }}</span>
+          </div>
+
+          <div class="explainer">
+            <mat-icon>info</mat-icon>
+            <p>Move funds from your Bolt wallet to your Stacks wallet.</p>
+          </div>
+
+          <div class="input-group">
+            <label>Amount (sat)</label>
+            <div class="amount-input">
+              <input type="text"
+                     [ngModel]="amount.toString()"
+                     [ngModelOptions]="{standalone: true}"
+                     placeholder="0"
+                     (keypress)="validateAmount($event)"
+                     (input)="onAmountInput($event)"
+                     inputmode="numeric"
+                     pattern="[0-9]*"
+                     min="0">
+              <button type="button" class="btn-max" (click)="setMaxAmount()">MAX</button>
+            </div>
+            @if (amount > 0) {
+              <small class="amount-preview">
+                = {{ amount | tokenAmount:'sBTC' }} sBTC
+              </small>
+            }
+            @if (exceedsBalance) {
+              <small class="error-message">
+                Insufficient balance
+              </small>
+            }
+            <small class="fee-info">
+              Fee: {{ getFee() }} sat
+            </small>
+          </div>
+
+          <div class="destination-info">
+            <mat-icon>account_balance_wallet</mat-icon>
+            <div class="info-text">
+              <span class="info-label">Destination</span>
+              <span class="info-value">Your Stacks Wallet</span>
+            </div>
+          </div>
+
+          <div class="action-buttons">
+            <button type="button" class="cancel-button" (click)="closeModal()">
+              Cancel
+            </button>
+            <button type="submit" class="submit-button" [disabled]="!amount || isProcessing || exceedsBalance">
+              Withdraw
+            </button>
+          </div>
+        </form>
+      }
+    </div>
+  </div>
+</div>

@@ -1,0 +1,154 @@
+<app-header></app-header>
+
+<div class="info-banner">
+    <div class="info-banner-content">
+        <div class="logo-icon">
+            <mat-icon>flash_on</mat-icon>
+        </div>
+        <p>Bolt Protocol enables users to pay for transactions on the Stacks blockchain with sBTC and allows instant
+            transfers between Bolt Wallets.</p>
+    </div>
+</div>
+
+<main class="container">
+    @if (isProcessing) {
+    <div class="loading-spinner">
+        <mat-spinner diameter="40"></mat-spinner>
+        <p>Processing transaction...</p>
+    </div>
+    } @else if (!isLoggedIn) {
+    <app-connect-wallet></app-connect-wallet>
+    } @else if (transactionInfo) {
+    <app-processing-transaction-info [transactionInfo]="transactionInfo"
+        (transactionComplete)="onTransactionComplete()">
+    </app-processing-transaction-info>
+    } @else if (boltTransactionInfo) {
+    <app-processing-bolt-transaction-info [boltTransaction]="boltTransactionInfo"
+        (transactionComplete)="onTransactionComplete()">
+    </app-processing-bolt-transaction-info>
+    } @else if (paymentReceived) {
+    <app-bolt-transaction-notification [boltTransaction]="paymentReceived"
+        (transactionComplete)="onTransactionComplete()">
+    </app-bolt-transaction-notification>
+    } @else {
+
+    @if (network !== 'mainnet') {
+    <div class="testnet-banner">
+        <div class="testnet-content">
+            <div class="testnet-warning">
+                <mat-icon>warning</mat-icon>
+                <span>Testnet Mode</span>
+            </div>
+        </div>
+    </div>
+    }
+
+    <div class="wallet-card">
+        <div class="wallet-address">
+            <span class="label">Your Bolt Address <span class="secondary-label">(Same as Stacks)</span></span>
+            <div class="address-display">
+                <span class="mono">{{ walletAddress }}</span>
+                <button class="copy-button" (click)="copyAddress()" matTooltip="Copy address">
+                    <mat-icon>content_copy</mat-icon>
+                </button>
+            </div>
+        </div>
+
+        <div class="balance-section">
+            <div class="balance-header">
+                <span>Bolt Wallet Balance</span>
+                <div class="unit-selector">
+                    <button type="button" [class.active]="displayUnit === 'sBTC'"
+                        (click)="displayUnit = 'sBTC'">sBTC</button>
+                    <button type="button" [class.active]="displayUnit === 'SAT'"
+                        (click)="displayUnit = 'SAT'">SAT</button>
+                </div>
+            </div>
+
+            <div class="balance-item">
+                <img [src]="tokenImageUrl" alt="sBTC">
+                <div class="balance-details">
+                    <span class="label">sBTC</span>
+                    <span class="amount">{{ formatBalance(boltWalletBalance) }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="wallet-actions">
+            <button class="action-button top-up" (click)="topUpBoltWallet()">
+                <mat-icon>add_circle</mat-icon>
+                <div class="button-text">
+                    <span class="primary-label">Deposit</span>
+                    <span class="secondary-label">(from Stacks)</span>
+                </div>
+            </button>
+            <button class="action-button withdraw" (click)="withdrawToBitcoin()">
+                <mat-icon>remove_circle</mat-icon>
+                <div class="button-text">
+                    <span class="primary-label">Withdraw</span>
+                    <span class="secondary-label">(to Stacks)</span>
+                </div>
+            </button>
+            <button class="action-button send" (click)="sendToBoltWallet()">
+                <mat-icon>send</mat-icon>
+                <span>Send</span>
+            </button>
+            <a class="action-button advanced" routerLink="/advanced">
+                <mat-icon>dashboard</mat-icon>
+                <div class="button-text">
+                    <span class="primary-label">Advanced</span>
+                    <span class="secondary-label">(Full features)</span>
+                </div>
+            </a>
+            <a class="action-button game" href="https://boltproto.org/games/block-constellation/" target="_blank">
+                <mat-icon>sports_esports</mat-icon>
+                <div class="button-text">
+                    <span class="primary-label">Play Game</span>
+                    <span class="secondary-label">(Block Constellation)</span>
+                </div>
+            </a>
+        </div>
+
+        <div class="fee-fund-section">
+            <div class="fee-fund-header">
+                <span>Fee Fund Balance</span>
+            </div>
+            <div class="fee-fund-content">
+                <div class="fee-fund-balance">{{ formatBalance(feeFundBalance) }}</div>
+                <button class="fee-fund-button" (click)="chargeFeeFund()">
+                    <mat-icon>account_balance_wallet</mat-icon>
+                    <span>Top Up Fee Fund</span>
+                </button>
+            </div>
+        </div>
+    </div>
+    }
+
+    @if (showSendModal) {
+    <app-bolt-wallet-ui-send [boltWalletBalance]="boltWalletBalance" (close)="closeSendModal()"
+        (transactionSubmitted)="handleSendTransaction($event)">
+    </app-bolt-wallet-ui-send>
+    }
+
+    @if (showDepositModal) {
+    <app-bolt-wallet-ui-deposit [stacksWalletBalance]="stacksWalletBalance" (close)="closeDepositModal()"
+        (transactionSubmitted)="handleDepositTransaction($event)">
+    </app-bolt-wallet-ui-deposit>
+    }
+
+    @if (showWithdrawModal) {
+    <app-bolt-wallet-ui-withdraw [boltWalletBalance]="boltWalletBalance" (close)="closeWithdrawModal()"
+        (transactionSubmitted)="handleWithdrawTransaction($event)">
+    </app-bolt-wallet-ui-withdraw>
+    }
+
+    @if (showFeeFundModal) {
+    <app-bolt-wallet-ui-fee-fund [stacksWalletBalance]="stacksWalletBalance" [feeFundBalance]="feeFundBalance"
+        (close)="closeFeeFundModal()" (transactionSubmitted)="handleFeeFundTransaction($event)">
+    </app-bolt-wallet-ui-fee-fund>
+    }
+
+    <app-info-note></app-info-note>
+</main>
+
+<app-footer></app-footer>

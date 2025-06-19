@@ -1,0 +1,74 @@
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-container" (click)="$event.stopPropagation()">
+    <div class="modal-header">
+      <h2>Top Up Fee Fund</h2>
+      <button class="close-button" (click)="closeModal()">
+        <mat-icon>close</mat-icon>
+      </button>
+    </div>
+
+    <div class="modal-content">
+      @if (isProcessing) {
+        <div class="loading-spinner">
+          <mat-spinner diameter="40"></mat-spinner>
+          <p>Processing transaction...</p>
+        </div>
+      } @else {
+        <form class="transfer-form" (ngSubmit)="onSubmit()">
+          <div class="balance-info">
+            <span class="label">Available in Stacks Wallet</span>
+            <span class="value">{{ formatBalanceForDisplay(stacksWalletBalance) }}</span>
+          </div>
+          
+          <!-- <div class="balance-info">
+            <span class="label">Current Fee Fund Balance</span>
+            <span class="value">{{ formatBalanceForDisplay(feeFundBalance) }}</span>
+          </div> -->
+
+          <div class="warning">
+            <mat-icon>warning</mat-icon>
+            <p>Your fee fund is used to pay transaction fees on the Stacks Blockchain. Make sure to use a wallet that supports paying your transaction fees with sBTC. Try <a href="https://wallet.example.com" target="_blank">Demo Wallet</a> for compatibility.</p>
+          </div>
+
+          <div class="input-group">
+            <label>Amount to add (sat)</label>
+            <div class="amount-input">
+              <input type="text"
+                     [ngModel]="amount.toString()"
+                     [ngModelOptions]="{standalone: true}"
+                     placeholder="0"
+                     (keypress)="validateAmount($event)"
+                     (input)="onAmountInput($event)"
+                     inputmode="numeric"
+                     pattern="[0-9]*"
+                     min="0">
+              <button type="button" class="btn-max" (click)="setMaxAmount()">MAX</button>
+            </div>
+            @if (amount > 0) {
+              <small class="amount-preview">
+                = {{ amount | tokenAmount:'sBTC' }} sBTC
+              </small>
+            }
+            @if (exceedsBalance) {
+              <small class="error-message">
+                Insufficient balance
+              </small>
+            }
+            <small class="fee-info">
+              Fee: {{ getFee() }} sat
+            </small>
+          </div>
+
+          <div class="action-buttons">
+            <button type="button" class="cancel-button" (click)="closeModal()">
+              Cancel
+            </button>
+            <button type="submit" class="submit-button" [disabled]="!amount || isProcessing || exceedsBalance">
+              Add
+            </button>
+          </div>
+        </form>
+      }
+    </div>
+  </div>
+</div>
