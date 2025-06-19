@@ -1,0 +1,51 @@
+// @import '../../../styles.scss';
+
+.connect-wallet-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.connect-wallet-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 20px;
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 8px;
+}
+
+.connect-wallet-text h3 {
+    margin: 0;
+    color: #333;
+    font-size: 24px;
+}
+
+.connect-wallet-text p {
+    margin: 0;
+    color: #666;
+    font-size: 16px;
+}
+
+// .connect-wallet-action button {
+//     padding: 10px 20px;
+//     font-size: 16px;
+//     border-radius: 4px;
+//     cursor: pointer;
+//     transition: background-color 0.3s ease;
+// }
+
+// .connect-wallet-action button:hover {
+//     background-color: #0056b3;
+//     color: #fff;
+// }
+
+@media (min-width: 768px) {
+    .connect-wallet-inner {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+}

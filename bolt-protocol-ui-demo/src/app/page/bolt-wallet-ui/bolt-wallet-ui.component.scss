@@ -1,0 +1,472 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background-color: #0a0e17;
+  color: #e4e4e4;
+  padding-top: 64px;
+}
+
+.container {
+  width: 100%;
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-sizing: border-box;
+
+  >* {
+    max-width: 100%;
+  }
+}
+
+.loading-spinner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+
+  p {
+    color: #8f9bb3;
+    margin: 0;
+  }
+}
+
+.wallet-card {
+  background-color: #151b27;
+  border-radius: 16px;
+  border: 1px solid #2a2f3a;
+  padding: 2rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.wallet-address {
+  margin-bottom: 2rem;
+
+  .label {
+    display: block;
+    color: #8f9bb3;
+    font-size: 0.9rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .secondary-label {
+    font-size: 0.8rem;
+    color: #6c757d;
+  }
+}
+
+.address-display {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  
+  .mono {
+    flex: 1;
+    font-family: 'Roboto Mono', monospace;
+    color: var(--primary);
+    font-size: 0.9rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .copy-button {
+    background: transparent;
+    border: none;
+    color: #8f9bb3;
+    padding: 4px;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 4px;
+
+    &:hover {
+      color: #e4e4e4;
+      background: #2a2f3a;
+    }
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+.balance-section {
+  margin-bottom: 2rem;
+
+  .balance-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding: 0 0.5rem;
+
+    span {
+      color: #8f9bb3;
+      font-size: 0.9rem;
+    }
+
+    .unit-selector {
+      display: flex;
+      gap: 1px;
+      background: #2a2f3a;
+      padding: 3px;
+      border-radius: 6px;
+      
+      button {
+        border: none;
+        background: transparent;
+        color: #8f9bb3;
+        padding: 4px 8px;
+        font-size: 0.75rem;
+        font-weight: 600;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.2s;
+  
+        &.active {
+          background: var(--primary);
+          color: #151b27;
+        }
+  
+        &:hover:not(.active) {
+          color: #e4e4e4;
+        }
+      }
+    }
+  }
+}
+
+.balance-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #1c2333;
+  border-radius: 12px;
+
+  img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
+  .balance-details {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    .label {
+      color: #8f9bb3;
+      font-size: 0.9rem;
+    }
+
+    .amount {
+      color: var(--primary);
+      font-size: 1.2rem;
+      font-weight: 500;
+    }
+  }
+}
+
+.wallet-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+  width: 100%;
+
+  .action-button {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem;
+    background-color: #1c2333;
+    border: 1px solid #2a2f3a;
+    color: #e4e4e4;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.2s;
+    
+    &:hover {
+      transform: translateY(-2px);
+      background-color: #232b3e;
+    }
+
+    mat-icon {
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+
+    span {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .button-text {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.1rem;
+    }
+
+    .primary-label {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+
+    .secondary-label {
+      font-size: 0.7rem;
+      color: rgba(228, 228, 228, 0.7);
+    }
+
+    // For the "Send" button that doesn't have a secondary label
+    > span {
+      font-size: 0.9rem;
+      font-weight: 500;
+    }
+  }
+
+  .send {
+    grid-column: span 2;
+    background-color: var(--primary);
+    color: #151b27;
+
+    &:hover {
+      background-color: #ff8c00;
+    }
+  }
+
+  .advanced {
+    grid-column: span 2;
+    background: linear-gradient(135deg, #2a2f3a 0%, #1c2333 100%);
+    border: 1px solid #3a4155;
+    margin-top: 0.5rem;
+    text-decoration: none;
+    
+    &:hover {
+      background: linear-gradient(135deg, #323946 0%, #232b3e 100%);
+      border-color: #4a516a;
+    }
+    
+    mat-icon {
+      color: #64B5F6;
+    }
+  }
+
+  .top-up mat-icon {
+    color: #4caf50;
+  }
+
+  .withdraw mat-icon {
+    color: #ff5252; // Changed to red to better contrast with the green "add" icon
+  }
+}
+
+.testnet-banner {
+  background: linear-gradient(90deg, #ff4444 0%, #ff6b6b 100%);
+  padding: 0.75rem;
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  margin-bottom: 2rem;
+}
+
+.testnet-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 1rem;
+}
+
+.testnet-warning {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: white;
+
+  mat-icon {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+  }
+
+  span {
+    font-weight: 500;
+    white-space: nowrap;
+  }
+}
+
+.info-banner {
+  background: linear-gradient(90deg, #1c2333 0%, #232b3e 100%);
+  border-bottom: 1px solid #3a4155;
+  padding: 0.8rem 0;
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.info-banner-content {
+  max-width: 800px;
+  margin: 0 auto;
+  display: flex;
+  align-items: left;
+  justify-content: left;
+  text-align: left;
+  gap: 1rem;
+  padding: 0 1.5rem;
+  
+  .logo-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--primary);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    flex-shrink: 0;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    
+    mat-icon {
+      color: #151b27;
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+  
+  p {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.4;
+    color: #e4e4e4;
+    font-weight: 400;
+    letter-spacing: 0.2px;
+  }
+}
+
+.fee-fund-section {
+  margin-top: 1.5rem;
+  margin-bottom: 0;
+
+  .fee-fund-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+
+    span {
+      color: #8f9bb3;
+      font-size: 0.9rem;
+    }
+  }
+
+  .fee-fund-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    background: #1c2333;
+    border-radius: 12px;
+  }
+
+  .fee-fund-balance {
+    color: var(--primary);
+    font-size: 1.2rem;
+    font-weight: 500;
+  }
+
+  .fee-fund-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.6rem 1rem;
+    background-color: rgba(var(--primary-rgb), 0.1);
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-weight: 500;
+    font-size: 0.9rem;
+
+    &:hover {
+      background-color: rgba(var(--primary-rgb), 0.2);
+    }
+
+    mat-icon {
+      font-size: 18px;
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 0 0.5rem;
+  }
+  
+  .wallet-card {
+    padding: 1.5rem;
+  }
+
+  .info-banner-content {
+    padding: 0 1rem;
+    
+    p {
+      font-size: 0.85rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 0.75rem;
+  }
+
+  .wallet-card {
+    padding: 1rem;
+  }
+  
+  .wallet-actions {
+    // Keep the grid layout for top-up and withdraw buttons
+    grid-template-columns: 1fr 1fr;
+    
+    // Ensure send and advanced buttons take full width
+    .send, .advanced {
+      grid-column: span 2;
+    }
+  }
+  
+  .wallet-address {
+    .secondary-label {
+      display: block;
+      margin-top: 0.2rem;
+    }
+  }
+
+  .fee-fund-section {
+    .fee-fund-content {
+      flex-direction: column;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .fee-fund-button {
+      width: 100%;
+      justify-content: center;
+    }
+  }
+}

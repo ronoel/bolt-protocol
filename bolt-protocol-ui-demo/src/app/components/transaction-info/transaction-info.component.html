@@ -1,0 +1,27 @@
+<div class="dialog-container">
+  <h2>
+    @if (currentStatus === 'pending') {
+    <mat-spinner diameter="24"></mat-spinner>
+    } @else if (currentStatus === 'success') {
+    <mat-icon class="success-icon">check_circle</mat-icon>
+    } @else {
+    <mat-icon class="error-icon">error</mat-icon>
+    }
+    <!-- {{currentStatusInfo.title}} -->
+  </h2>
+  <div class="dialog-content">
+    <p class="tx-id">
+      Transaction ID: <span class="mono">0x{{transactionInfo.txId}}</span>
+    </p>
+    <div class="status-info">
+      <p>{{getMessage()}}</p>
+      <a [href]="uri" target="_blank" class="explorer-link">
+        Visualizar transação na blockchain
+        <mat-icon>open_in_new</mat-icon>
+      </a>
+    </div>
+    @if (currentStatus !== 'pending') {
+    <button class="btn-primary" (click)="onComplete()">OK</button>
+    }
+  </div>
+</div>

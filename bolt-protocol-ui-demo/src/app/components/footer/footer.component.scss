@@ -1,0 +1,122 @@
+.app-footer {
+  background-color: #151b27;
+  border-top: 1px solid #2a2f3a;
+  padding: 2rem 0;
+  margin-top: 4rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.footer-section {
+  h3 {
+    color: var(--primary);
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    color: #8f9bb3;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+  }
+
+  &.feedback {
+    border-top: 1px solid #2a2f3a;
+    padding-top: 2rem;
+    
+    .feedback-text {
+      text-align: center;
+      
+      a {
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 500;
+        
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  &.copyright {
+    border-top: 1px solid #2a2f3a;
+    padding-top: 1.5rem;
+    margin-top: 1rem;
+    
+    .copyright-text {
+      text-align: center;
+      color: #8f9bb3;
+      font-size: 0.875rem;
+      margin: 0;
+    }
+  }
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    background: #1c2333;
+    border: 1px solid #2a2f3a;
+    border-radius: 8px;
+    color: #e4e4e4;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    min-width: 200px;  // Add minimum width
+    box-sizing: border-box; // Ensure padding is included in width
+
+    &:hover {
+      background: #2a2f3a;
+      transform: translateY(-1px);
+    }
+
+    mat-icon {
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    span {
+      white-space: nowrap; // Prevent text from wrapping
+      overflow: hidden;    // Hide overflow
+      text-overflow: ellipsis; // Add ellipsis for overflow
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .footer-content {
+    padding: 0 1rem;
+  }
+
+  .social-links {
+    flex-direction: column;
+    width: 100%;  // Ensure full width
+    
+    .social-link {
+      width: 100%;
+      min-width: 0;  // Remove minimum width on mobile
+      justify-content: center;
+      padding: 1rem;  // Adjust padding for better touch targets
+      
+      span {
+        text-align: center;  // Center text
+      }
+    }
+  }
+}
