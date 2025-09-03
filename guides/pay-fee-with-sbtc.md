@@ -60,7 +60,7 @@ async function depositFeeFund() {
   const serializedTx = bytesToHex(transaction.serializeBytes());
 
   // This transaction must be submitted to Bolt Protocol's exclusive transaction endpoint
-  const response = await fetch('https://boltproto.org/api/v1/transaction/sbtc-token', {
+  const response = await fetch('https://boltproto.org/api/v1/sponsor/sbtc-token/transaction', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ serializedTx, fee })
